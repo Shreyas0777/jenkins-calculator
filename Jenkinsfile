@@ -27,6 +27,14 @@ pipeline {
             }
         }
 
+        stage('Docker') {
+            steps {
+                sh 'docker build -t usn-calculator .'
+                sh 'docker run --rm usn-calculator'
+            }
+        }
+        
+
         stage('Approval') {
             steps {
                 input message: 'Approve deployment to staging?', ok: 'Deploy'
